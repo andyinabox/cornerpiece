@@ -56,3 +56,5 @@ Desktop.ini
 #########################
 
 .mailmap
+*.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcodeproj/xcuserdata/*.xcuserdatad/xcdebugger/
