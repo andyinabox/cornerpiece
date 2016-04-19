@@ -16,6 +16,8 @@ void ofApp::setup(){
   gui.setup();
   gui.add(showGrid.setup("Show grid", false));
   gui.add(drawWireframe.setup("Draw wireframe", false));
+  gui.add(useVideo.setup("Use video", true));
+  
   gui.add(tri1Tx0s.setup("tri1Tx0s", 0.5, 0, 1));
   gui.add(tri1Tx0t.setup("tri1Tx0t", 0.5, 0, 1));
   gui.add(tri1Tx1s.setup("tri1Tx1s", 1, 0, 1));
@@ -38,6 +40,10 @@ void ofApp::setup(){
   gui.add(tri3Tx2t.setup("tri3Tx2t", 0.2, 0, 1));
   
   image.load("corner-1024.jpg");
+  
+  vid.load("videos/corner-1024.mov");
+	vid.setLoopState(OF_LOOP_NORMAL);
+
   
   tri1.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
   tri1.addVertex(ofPoint(0, 0, 0));
@@ -70,11 +76,18 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
+
+  if(useVideo) {
+    vid.update();
+    tex = vid.getTexture();
+  } else {
+    tex = image.getTexture();
+  }
+
   tri1.clearTexCoords();
   tri1.addTexCoord(ofVec2f(tri1Tx0s, tri1Tx0t));
   tri1.addTexCoord(ofVec2f(tri1Tx1s, tri1Tx1t));
   tri1.addTexCoord(ofVec2f(tri1Tx2s, tri1Tx2t));
-  
   
   tri2.clearTexCoords();
   tri2.addTexCoord(ofVec2f(tri2Tx0s, tri2Tx0t));
@@ -92,24 +105,21 @@ void ofApp::draw(){
   ofClear(0);
 
   cam.begin();
-  
-
     if(showGrid) {
       ofDrawGrid(10);
     }
   
-      if(drawWireframe) {
-        tri1.drawWireframe();
-        tri2.drawWireframe();
-        tri3.drawWireframe();
-      } else {
-        image.getTexture().bind();
-        tri1.draw();
-        tri2.draw();
-        tri3.draw();
-        image.getTexture().unbind();
-
-      }
+    if(drawWireframe) {
+      tri1.drawWireframe();
+      tri2.drawWireframe();
+      tri3.drawWireframe();
+    } else {
+      tex.bind();
+      tri1.draw();
+      tri2.draw();
+      tri3.draw();
+      tex.unbind();
+    }
   cam.end();
   
   ofDisableDepthTest();
@@ -128,6 +138,18 @@ void ofApp::keyPressed(int key){
   
   if(key == 'f') {
     ofToggleFullscreen();
+  }
+  
+  if(key == 'w') {
+    drawWireframe = !drawWireframe;
+  }
+  
+  if(key == ' ') {
+    if(vid.isPlaying()) {
+      vid.stop();
+    } else if (vid.isInitialized()) {
+      vid.play();
+    }
   }
 }
 

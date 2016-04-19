@@ -56,3 +56,4 @@ Desktop.ini
 #########################
 
 .mailmap
+bin/data/videos/*
