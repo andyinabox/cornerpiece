@@ -25,7 +25,8 @@ class ofApp : public ofBaseApp{
     bool showGui = true;
   
     ofImage image;
-    ofTexture imageTexture;
+    ofVideoPlayer vid;
+    ofTexture tex;
 //    ofPoint points[4];
 //    int cornerIndex = 0;
 		
@@ -38,6 +39,7 @@ class ofApp : public ofBaseApp{
   
     ofxToggle showGrid;
     ofxToggle drawWireframe;
+    ofxToggle useVideo;
   
     ofxFloatSlider tri1Tx0s;
     ofxFloatSlider tri1Tx0t;
