@@ -16,15 +16,28 @@ void ofApp::setup(){
 
   gui.setup();
   gui.add(showGrid.setup("Show grid", true));
-  gui.add(randomFloatSlider.setup("Random float slider", 50., 0., 100.));
+//  gui.add(cornerScale.setup("Corner scale", 100, 0, 1000));
 
   ofLoadImage(imageTexture, "corner.jpg");
   
   corner.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
   corner.addVertex(ofPoint(0, 0, 0));
-  corner.addVertex(ofPoint(0, 100, 0));
-  corner.addVertex(ofPoint(0, 100, 100));
+  corner.addVertex(ofPoint(cornerScale, 0, 0));
+  corner.addVertex(ofPoint(cornerScale, -cornerScale, 0));
+  corner.addVertex(ofPoint(0, -cornerScale, 0));
+  
   corner.addVertex(ofPoint(0, 0, 0));
+  corner.addVertex(ofPoint(0, 0, cornerScale));
+  corner.addVertex(ofPoint(0, -cornerScale, cornerScale));
+  corner.addVertex(ofPoint(0, -cornerScale, 0));
+
+  corner.addVertex(ofPoint(0, 0, 0));
+  corner.addVertex(ofPoint(cornerScale, 0, 0));
+  corner.addVertex(ofPoint(cornerScale, 0, cornerScale));
+  corner.addVertex(ofPoint(0, 0, cornerScale));
+
+  corner.addVertex(ofPoint(0, 0, 0));
+
   
 //  points[0].x = 100;
 //  points[0].y = 100;

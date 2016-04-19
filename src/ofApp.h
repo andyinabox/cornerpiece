@@ -32,7 +32,8 @@ class ofApp : public ofBaseApp{
   
   
     ofxToggle showGrid;
-    ofxFloatSlider randomFloatSlider;
+//    ofxFloatSlider cornerScale;
+    float cornerScale = 100;
     ofxPanel gui;
   
 };
