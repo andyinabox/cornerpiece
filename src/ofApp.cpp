@@ -78,8 +78,8 @@ void ofApp::setup(){
   
   tri3.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
   tri3.addVertex(ofPoint(0, 0, 0));
-  tri3.addVertex(ofPoint(cornerScale, 0, 0));
   tri3.addVertex(ofPoint(0, 0, cornerScale));
+  tri3.addVertex(ofPoint(cornerScale, 0, 0));
 
   tri3.addIndex(0);
   tri3.addIndex(1);
@@ -114,19 +114,19 @@ void ofApp::update(){
   }
 
   tri1.clearTexCoords();
-  tri1.addTexCoord(ofVec2f(tri1Tx0s, tri1Tx0t));
-  tri1.addTexCoord(ofVec2f(tri1Tx1s, tri1Tx1t));
-  tri1.addTexCoord(ofVec2f(tri1Tx2s, tri1Tx2t));
+  tri1.addTexCoord(cPoints[2]);
+  tri1.addTexCoord(cPoints[1]);
+  tri1.addTexCoord(cPoints[3]);
   
   tri2.clearTexCoords();
-  tri2.addTexCoord(ofVec2f(tri2Tx0s, tri2Tx0t));
-  tri2.addTexCoord(ofVec2f(tri2Tx1s, tri2Tx1t));
-  tri2.addTexCoord(ofVec2f(tri2Tx2s, tri2Tx2t));
+  tri2.addTexCoord(cPoints[2]);
+  tri2.addTexCoord(cPoints[0]);
+  tri2.addTexCoord(cPoints[3]);
   
   tri3.clearTexCoords();
-  tri3.addTexCoord(ofVec2f(tri3Tx0s, tri3Tx0t));
-  tri3.addTexCoord(ofVec2f(tri3Tx1s, tri3Tx1t));
-  tri3.addTexCoord(ofVec2f(tri3Tx2s, tri3Tx2t));
+  tri3.addTexCoord(cPoints[2]);
+  tri3.addTexCoord(cPoints[0]);
+  tri3.addTexCoord(cPoints[1]);
 }
 
 //--------------------------------------------------------------
