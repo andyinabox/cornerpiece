@@ -21,6 +21,8 @@ class ofApp : public ofBaseApp{
 		void windowResized(int w, int h);
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
+
+    bool showGui = true;
   
     ofImage image;
     ofTexture imageTexture;
@@ -29,12 +31,35 @@ class ofApp : public ofBaseApp{
 		
     ofLight light;
     ofEasyCam cam;
-    ofMesh corner;
-    ofMesh rect;
+    ofMesh tri1;
+    ofMesh tri2;
+    ofMesh tri3;
   
   
     ofxToggle showGrid;
     ofxToggle drawWireframe;
+  
+    ofxFloatSlider tri1Tx0s;
+    ofxFloatSlider tri1Tx0t;
+    ofxFloatSlider tri1Tx1s;
+    ofxFloatSlider tri1Tx1t;
+    ofxFloatSlider tri1Tx2s;
+    ofxFloatSlider tri1Tx2t;
+
+    ofxFloatSlider tri2Tx0s;
+    ofxFloatSlider tri2Tx0t;
+    ofxFloatSlider tri2Tx1s;
+    ofxFloatSlider tri2Tx1t;
+    ofxFloatSlider tri2Tx2s;
+    ofxFloatSlider tri2Tx2t;
+
+    ofxFloatSlider tri3Tx0s;
+    ofxFloatSlider tri3Tx0t;
+    ofxFloatSlider tri3Tx1s;
+    ofxFloatSlider tri3Tx1t;
+    ofxFloatSlider tri3Tx2s;
+    ofxFloatSlider tri3Tx2t;
+  
 //    ofxFloatSlider cornerScale;
     float cornerScale = 100;
     ofxPanel gui;
