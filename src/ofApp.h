@@ -22,6 +22,7 @@ class ofApp : public ofBaseApp{
 		void dragEvent(ofDragInfo dragInfo);
 		void gotMessage(ofMessage msg);
   
+    ofImage image;
     ofTexture imageTexture;
 //    ofPoint points[4];
 //    int cornerIndex = 0;
@@ -29,9 +30,11 @@ class ofApp : public ofBaseApp{
     ofLight light;
     ofEasyCam cam;
     ofMesh corner;
+    ofMesh rect;
   
   
     ofxToggle showGrid;
+    ofxToggle drawWireframe;
 //    ofxFloatSlider cornerScale;
     float cornerScale = 100;
     ofxPanel gui;

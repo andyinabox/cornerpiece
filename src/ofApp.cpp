@@ -13,14 +13,19 @@ void ofApp::setup(){
 	// but we have to explicitly normalize our tex coords here
 	ofEnableNormalizedTexCoords();
 
+  ofEnableArbTex();
 
   gui.setup();
   gui.add(showGrid.setup("Show grid", true));
+  gui.add(drawWireframe.setup("Draw wireframe", false));
 //  gui.add(cornerScale.setup("Corner scale", 100, 0, 1000));
 
-  ofLoadImage(imageTexture, "corner.jpg");
+  image.load("corner-1024.jpg");
+//  imageTexture.allocate(image.getPixels(), true);
+//  ofLoadImage(imageTexture, "corner-1024.jpg");
   
-  corner.setMode(OF_PRIMITIVE_TRIANGLE_STRIP);
+  corner.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+  
   corner.addVertex(ofPoint(0, 0, 0));
   corner.addVertex(ofPoint(cornerScale, 0, 0));
   corner.addVertex(ofPoint(cornerScale, -cornerScale, 0));
@@ -38,7 +43,37 @@ void ofApp::setup(){
 
   corner.addVertex(ofPoint(0, 0, 0));
 
+
+  corner.addIndex(5);
+  corner.addIndex(1);
+  corner.addIndex(3);
+  corner.addIndex(6);
+//  corner.addIndex(0);
+
+  corner.addTexCoord(ofVec2f(0,0));
+  corner.addTexCoord(ofVec2f(0, 1));
+  corner.addTexCoord(ofVec2f(1, 1));
+  corner.addTexCoord(ofVec2f(1, 0));
+//  corner.addTexCoord(ofVec2f(0.5, 0.5));
   
+//  rect.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
+//  rect.addVertex(ofPoint(0, 0, 0));
+//  rect.addVertex(ofPoint(cornerScale, 0, 0));
+//  rect.addVertex(ofPoint(cornerScale, -cornerScale, 0));
+//  rect.addVertex(ofPoint(0, -cornerScale, 0));
+//  rect.addVertex(ofPoint(0, 0, 0));
+//  
+//  
+//  rect.addIndex(0);
+//  rect.addIndex(1);
+//  rect.addIndex(2);
+//  rect.addIndex(3);
+//
+//  rect.addTexCoord(ofVec2f(0, 1));
+//  rect.addTexCoord(ofVec2f(1, 1));
+//  rect.addTexCoord(ofVec2f(1, 0));
+//  rect.addTexCoord(ofVec2f(0, 0));
+//  
 //  points[0].x = 100;
 //  points[0].y = 100;
 //  points[1].x = 600;
@@ -56,7 +91,7 @@ void ofApp::update(){
 
 //--------------------------------------------------------------
 void ofApp::draw(){
-  ofClear(0);
+//  ofClear(0);
 
 //  imageTexture.draw(points[0], points[1], points[2], points[3]);
 
@@ -66,20 +101,16 @@ void ofApp::draw(){
     if(showGrid) {
       ofDrawGrid(10);
     }
-//    imageTexture.bind();
-////      ofDrawBox(100);
-//      ofBeginShape();
-//        ofVertex(0, 0, 0);
-//        ofVertex(0, 100, 0);
-//        ofVertex(0, 100, 100);
-//        ofVertex(0, 0, 100);
-//        ofVertex(0, 0, 0);
-//        ofVertex(100, 0, 0);
-//        ofVertex(0, 100, 0);
-//        ofVertex(0, 0, 0);
-//      ofEndShape();
-//    imageTexture.bind();
-    corner.draw();
+    image.getTexture().bind();
+  
+      if(drawWireframe) {
+        corner.drawWireframe();
+//        rect.drawWireframe();
+      } else {
+        corner.draw();
+//        rect.draw();
+      }
+    image.getTexture().unbind();
   cam.end();
   
   ofDisableDepthTest();
