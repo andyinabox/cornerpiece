@@ -2,7 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
-#include "ofxManipulator.h"
+#include "Corner.h"
 
 class ofApp : public ofBaseApp{
 
@@ -25,32 +25,32 @@ class ofApp : public ofBaseApp{
 
     bool showGui = true;
   
-    ofImage image;
+//    ofImage image;
     ofVideoPlayer vid;
-    ofTexture tex;
-    vector<ofVec2f> cPoints;
-    int cIndex = 0;
+//    ofTexture tex;
+//    vector<ofVec2f> cPoints;
+//    int cIndex = 0;
 //    ofPoint points[4];
 //    int cornerIndex = 0;
 		
     ofLight light;
     ofCamera cam;
-    ofxManipulator manipulator;
+    Corner corner;
   
   
-    ofMesh tri1;
-    ofMesh tri2;
-    ofMesh tri3;
+//    ofMesh tri1;
+//    ofMesh tri2;
+//    ofMesh tri3;
     ofMesh cRect;
   
   
     ofxToggle drawWireframe;
-    ofxToggle useVideo;
+//    ofxToggle useVideo;
     ofxToggle showCalibration;
   
   
 //    ofxFloatSlider cornerScale;
-    float cornerScale = 100;
+//    float cornerScale = 100;
     ofxPanel gui;
   
 };
