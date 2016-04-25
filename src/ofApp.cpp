@@ -17,31 +17,8 @@ void ofApp::setup(){
 	ofEnableNormalizedTexCoords();
 
   gui.setup("controls", "setting.xml", ofGetWidth() - 250, 0);
-  gui.add(showGrid.setup("Show grid", false));
   gui.add(drawWireframe.setup("Draw wireframe", false));
   gui.add(useVideo.setup("Use video", true));
-
-  
-  gui.add(tri1Tx0s.setup("tri1Tx0s", 0.5, 0, 1));
-  gui.add(tri1Tx0t.setup("tri1Tx0t", 0.5, 0, 1));
-  gui.add(tri1Tx1s.setup("tri1Tx1s", 1, 0, 1));
-  gui.add(tri1Tx1t.setup("tri1Tx1t", 0.2, 0, 1));
-  gui.add(tri1Tx2s.setup("tri1Tx2s", 0, 0, 1));
-  gui.add(tri1Tx2t.setup("tri1Tx2t", 0.2, 0, 1));
-  
-  gui.add(tri2Tx0s.setup("tri2Tx0s", 0.5, 0, 1));
-  gui.add(tri2Tx0t.setup("tri2Tx0t", 0.5, 0, 1));
-  gui.add(tri2Tx1s.setup("tri2Tx1s", 0, 0, 1));
-  gui.add(tri2Tx1t.setup("tri2Tx1t", 1, 0, 1));
-  gui.add(tri2Tx2s.setup("tri2Tx2s", 0, 0, 1));
-  gui.add(tri2Tx2t.setup("tri2Tx2t", 0.2, 0, 1));
-  
-  gui.add(tri3Tx0s.setup("tri3Tx0s", 0.5, 0, 1));
-  gui.add(tri3Tx0t.setup("tri3Tx0t", 0.5, 0, 1));
-  gui.add(tri3Tx1s.setup("tri3Tx1s", 0.5, 0, 1));
-  gui.add(tri3Tx1t.setup("tri3Tx1t", 1, 0, 1));
-  gui.add(tri3Tx2s.setup("tri3Tx2s", 1, 0, 1));
-  gui.add(tri3Tx2t.setup("tri3Tx2t", 0.2, 0, 1));
 
   gui.add(showCalibration.setup("Show calibration", false));
 
@@ -50,7 +27,6 @@ void ofApp::setup(){
   cPoints.push_back(ofVec2f(1, 0));
   cPoints.push_back(ofVec2f(0.5, 0.5));
   cPoints.push_back(ofVec2f(0.5, 1));
-
 
   image.load("corner-1024.jpg");
   
@@ -156,9 +132,6 @@ void ofApp::draw(){
   } else {
     ofEnableDepthTest();
     cam.begin();
-      if(showGrid) {
-        ofDrawGrid(10);
-      }
     
       if(drawWireframe) {
         tri1.drawWireframe();
