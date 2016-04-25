@@ -15,52 +15,61 @@ void Corner::setup() {
   setGlobalPosition(0, 0, 0);
 
   // create base triangle
-  triRight.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
-  triRight.addVertex(ofPoint(0, 0, 0));
-  triRight.addVertex(ofPoint(CORNER_SCALE, 0, 0));
-  triRight.addVertex(ofPoint(0, CORNER_SCALE, 0));
-
-  triRight.addIndex(0);
-  triRight.addIndex(1);
-  triRight.addIndex(2);
-
-  triLeft.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
-  triLeft.addVertex(ofPoint(0, 0, 0));
-  triLeft.addVertex(ofPoint(0, 0, CORNER_SCALE));
-  triLeft.addVertex(ofPoint(0, CORNER_SCALE, 0));
-
-  triLeft.addIndex(0);
-  triLeft.addIndex(1);
-  triLeft.addIndex(2);
+  cornerMesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
   
-  triTop.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
-  triTop.addVertex(ofPoint(0, 0, 0));
-  triTop.addVertex(ofPoint(0, 0, CORNER_SCALE));
-  triTop.addVertex(ofPoint(CORNER_SCALE, 0, 0));
+  // right tri
+  cornerMesh.addVertex(ofPoint(0, 0, 0));
+  cornerMesh.addVertex(ofPoint(CORNER_SCALE, 0, 0));
+  cornerMesh.addVertex(ofPoint(0, CORNER_SCALE, 0));
 
-  triTop.addIndex(0);
-  triTop.addIndex(1);
-  triTop.addIndex(2);
+  // left tri
+  cornerMesh.addVertex(ofPoint(0, 0, 0));
+  cornerMesh.addVertex(ofPoint(0, 0, CORNER_SCALE));
+  cornerMesh.addVertex(ofPoint(0, CORNER_SCALE, 0));
+  
+  // top tri
+  cornerMesh.addVertex(ofPoint(0, 0, 0));
+  cornerMesh.addVertex(ofPoint(0, 0, CORNER_SCALE));
+  cornerMesh.addVertex(ofPoint(CORNER_SCALE, 0, 0));
+
+  cornerMesh.addIndex(0);
+  cornerMesh.addIndex(1);
+  cornerMesh.addIndex(2);
+  cornerMesh.addIndex(3);
+  cornerMesh.addIndex(4);
+  cornerMesh.addIndex(5);
+  cornerMesh.addIndex(6);
+  cornerMesh.addIndex(7);
+  cornerMesh.addIndex(8);
   
   // default calibration
   setCalibrationPoints(ofVec2f(0, 0), ofVec2f(1, 0), ofVec2f(0.5, 0.5), ofVec2f(0.5, 1));
+  
+  manipulator.toggleRotation();
 }
 
 
 void Corner::draw(ofCamera cam) {
   
+  manipulator.getRotation().getRotate(rotationAngle, rotationVector);
+  
+  ofPushMatrix();
+  
+    ofTranslate(manipulator.getTranslation());
+    ofRotate(rotationAngle, rotationVector.x, rotationVector.y, rotationVector.z);
+  
   if(calibrationMode) {
-    triRight.drawWireframe();
-    triLeft.drawWireframe();
-    triTop.drawWireframe();
-    manipulator.draw(cam);
+    cornerMesh.drawWireframe();
   } else {
     texture.bind();
-      triRight.draw();
-      triLeft.draw();
-      triTop.draw();
+      cornerMesh.draw();
     texture.unbind();
   }
+  
+  ofPopMatrix();
+  
+  manipulator.draw(cam);
+
 }
 
 void Corner::setTexture(ofTexture tex) {
@@ -74,19 +83,21 @@ void Corner::setCalibrationPoints(ofVec2f topLeft, ofVec2f topRight, ofVec2f mid
   calibration.middle = middle;
   calibration.bottom = bottom;
 
-  triRight.clearTexCoords();
-  triRight.addTexCoord(calibration.middle);
-  triRight.addTexCoord(calibration.topRight);
-  triRight.addTexCoord(calibration.bottom);
+  cornerMesh.clearTexCoords();
   
-  triLeft.clearTexCoords();
-  triLeft.addTexCoord(calibration.middle);
-  triLeft.addTexCoord(calibration.topLeft);
-  triLeft.addTexCoord(calibration.bottom);
+  // right tri
+  cornerMesh.addTexCoord(calibration.middle);
+  cornerMesh.addTexCoord(calibration.topRight);
+  cornerMesh.addTexCoord(calibration.bottom);
   
-  triTop.clearTexCoords();
-  triTop.addTexCoord(calibration.middle);
-  triTop.addTexCoord(calibration.topLeft);
-  triTop.addTexCoord(calibration.topRight);
+  // left tri
+  cornerMesh.addTexCoord(calibration.middle);
+  cornerMesh.addTexCoord(calibration.topLeft);
+  cornerMesh.addTexCoord(calibration.bottom);
+  
+  // bottom tri
+  cornerMesh.addTexCoord(calibration.middle);
+  cornerMesh.addTexCoord(calibration.topLeft);
+  cornerMesh.addTexCoord(calibration.topRight);
 
 }

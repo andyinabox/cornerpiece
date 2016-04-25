@@ -34,7 +34,10 @@ class Corner : public ofNode {
   
     ofxManipulator manipulator;
     ofTexture texture;
-    ofMesh triLeft, triRight, triTop;
+    ofMesh cornerMesh;
+
+    float rotationAngle;
+    ofVec3f rotationVector;
   
   protected:
     CornerCalibration calibration;
