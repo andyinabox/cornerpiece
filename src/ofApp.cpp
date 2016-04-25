@@ -33,11 +33,16 @@ void ofApp::setup(){
   vid.load("videos/corner-1024.mov");
 	vid.setLoopState(OF_LOOP_NORMAL);
 
+  cam.setGlobalPosition(100, 100, 100);
+  cam.lookAt(ofVec3f(0, 0, 0));
+  cam.roll(180);
+
+  manipulator.toggleTranslation();
   
   tri1.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
   tri1.addVertex(ofPoint(0, 0, 0));
   tri1.addVertex(ofPoint(cornerScale, 0, 0));
-  tri1.addVertex(ofPoint(0, -cornerScale, 0));
+  tri1.addVertex(ofPoint(0, cornerScale, 0));
 
   tri1.addIndex(0);
   tri1.addIndex(1);
@@ -46,7 +51,7 @@ void ofApp::setup(){
   tri2.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
   tri2.addVertex(ofPoint(0, 0, 0));
   tri2.addVertex(ofPoint(0, 0, cornerScale));
-  tri2.addVertex(ofPoint(0, -cornerScale, 0));
+  tri2.addVertex(ofPoint(0, cornerScale, 0));
 
   tri2.addIndex(0);
   tri2.addIndex(1);
@@ -144,9 +149,15 @@ void ofApp::draw(){
         tri3.draw();
         tex.unbind();
       }
+    
+      manipulator.draw(cam);
+
     cam.end();
+    
+    
     ofDisableDepthTest();
   }
+
 
 
   if(showGui) {

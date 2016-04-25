@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "ofxManipulator.h"
 
 class ofApp : public ofBaseApp{
 
@@ -33,7 +34,10 @@ class ofApp : public ofBaseApp{
 //    int cornerIndex = 0;
 		
     ofLight light;
-    ofEasyCam cam;
+    ofCamera cam;
+    ofxManipulator manipulator;
+  
+  
     ofMesh tri1;
     ofMesh tri2;
     ofMesh tri3;
