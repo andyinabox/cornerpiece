@@ -57,3 +57,6 @@ Desktop.ini
 
 .mailmap
 bin/data/videos/*
+*.xcodeproj/project.xcworkspace/xcuserdata/*.xcuserdatad/UserInterfaceState.xcuserstate
+*.xcodeproj/xcuserdata/*.xcuserdatad/xcdebugger/
+
