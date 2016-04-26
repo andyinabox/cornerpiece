@@ -12,3 +12,10 @@ Release Notes
 ### 0.1.0
 
  * Initial prototype
+ 
+ 
+TODO
+-----
+
+[ ] - Make calibration keyframeable
+[ ] - Troubleshoot performance issues 
