@@ -10,6 +10,9 @@ class ofApp : public ofBaseApp{
 		void setup();
 		void update();
 		void draw();
+  
+    void toggleCameraMovement(bool &value);
+    void toggleWireframe(bool &value);
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -25,32 +28,18 @@ class ofApp : public ofBaseApp{
 
     bool showGui = true;
   
-//    ofImage image;
     ofVideoPlayer vid;
-//    ofTexture tex;
-//    vector<ofVec2f> cPoints;
-//    int cIndex = 0;
-//    ofPoint points[4];
-//    int cornerIndex = 0;
-		
     ofLight light;
-    ofCamera cam;
+    ofEasyCam cam;
     Corner corner;
   
-  
-//    ofMesh tri1;
-//    ofMesh tri2;
-//    ofMesh tri3;
+    int cIndex = 0;
     ofMesh cRect;
   
-  
-    ofxToggle drawWireframe;
-//    ofxToggle useVideo;
-    ofxToggle showCalibration;
-  
-  
-//    ofxFloatSlider cornerScale;
-//    float cornerScale = 100;
     ofxPanel gui;
+    ofxToggle drawWireframe;
+    ofxToggle showCalibration;
+    ofxToggle cameraMovement;
+  
   
 };

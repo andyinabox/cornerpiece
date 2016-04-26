@@ -15,33 +15,35 @@
 
 #include "ofxManipulator.h"
 
-typedef struct {
-  ofVec2f topLeft;
-  ofVec2f topRight;
-  ofVec2f middle;
-  ofVec2f bottom;
-} CornerCalibration;
-
 class Corner : public ofNode {
   public:
-    void setup();
+    void setup(float scale);
     void draw(ofCamera cam);
   
     void setTexture(ofTexture tex);
-    void setCalibrationPoints(ofVec2f topLeft, ofVec2f topRight, ofVec2f middle, ofVec2f bottom);
+    void setCalibrationPoints(vector<ofVec2f> points);
+    void setCalibrationPoint(int index, ofVec2f point);
   
-    bool calibrationMode = false;
+    vector<ofVec2f> getCalibrationPoints();
+  
+    void toggleWireframe(bool b);
+  
+    bool bWireframe = false;
+
+    float scale = 100;
   
     ofxManipulator manipulator;
     ofTexture texture;
     ofMesh cornerMesh;
+  
+  protected:
+  
+  private:
+    void updateTexCoords();
 
     float rotationAngle;
     ofVec3f rotationVector;
-  
-  protected:
-    CornerCalibration calibration;
-  
-  private:
+    vector<ofVec2f> calibration;
+
 
 };

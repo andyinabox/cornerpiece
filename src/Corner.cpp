@@ -8,9 +8,9 @@
 
 #include "Corner.h"
 
-#define CORNER_SCALE 100
+void Corner::setup(float scale) {
 
-void Corner::setup() {
+  scale = scale;
 
   setGlobalPosition(0, 0, 0);
 
@@ -19,18 +19,18 @@ void Corner::setup() {
   
   // right tri
   cornerMesh.addVertex(ofPoint(0, 0, 0));
-  cornerMesh.addVertex(ofPoint(CORNER_SCALE, 0, 0));
-  cornerMesh.addVertex(ofPoint(0, CORNER_SCALE, 0));
+  cornerMesh.addVertex(ofPoint(scale, 0, 0));
+  cornerMesh.addVertex(ofPoint(0, scale, 0));
 
   // left tri
   cornerMesh.addVertex(ofPoint(0, 0, 0));
-  cornerMesh.addVertex(ofPoint(0, 0, CORNER_SCALE));
-  cornerMesh.addVertex(ofPoint(0, CORNER_SCALE, 0));
+  cornerMesh.addVertex(ofPoint(0, 0, scale));
+  cornerMesh.addVertex(ofPoint(0, scale, 0));
   
   // top tri
   cornerMesh.addVertex(ofPoint(0, 0, 0));
-  cornerMesh.addVertex(ofPoint(0, 0, CORNER_SCALE));
-  cornerMesh.addVertex(ofPoint(CORNER_SCALE, 0, 0));
+  cornerMesh.addVertex(ofPoint(0, 0, scale));
+  cornerMesh.addVertex(ofPoint(scale, 0, 0));
 
   cornerMesh.addIndex(0);
   cornerMesh.addIndex(1);
@@ -43,7 +43,13 @@ void Corner::setup() {
   cornerMesh.addIndex(8);
   
   // default calibration
-  setCalibrationPoints(ofVec2f(0, 0), ofVec2f(1, 0), ofVec2f(0.5, 0.5), ofVec2f(0.5, 1));
+  vector<ofVec2f> c;
+  c.push_back(ofVec2f(0, 0));
+  c.push_back(ofVec2f(1, 0));
+  c.push_back(ofVec2f(0.5, 0.5));
+  c.push_back(ofVec2f(0.5, 1));
+  
+  setCalibrationPoints(c);
   
   manipulator.toggleRotation();
 }
@@ -58,17 +64,19 @@ void Corner::draw(ofCamera cam) {
     ofTranslate(manipulator.getTranslation());
     ofRotate(rotationAngle, rotationVector.x, rotationVector.y, rotationVector.z);
   
-  if(calibrationMode) {
-    cornerMesh.drawWireframe();
-  } else {
-    texture.bind();
-      cornerMesh.draw();
-    texture.unbind();
-  }
-  
+    if(bWireframe) {
+      cornerMesh.drawWireframe();
+    } else {
+      texture.bind();
+        cornerMesh.draw();
+      texture.unbind();
+    }
+    
   ofPopMatrix();
   
-  manipulator.draw(cam);
+  if(bWireframe) {
+    manipulator.draw(cam);
+  }
 
 }
 
@@ -76,28 +84,40 @@ void Corner::setTexture(ofTexture tex) {
   texture = tex;
 }
 
-void Corner::setCalibrationPoints(ofVec2f topLeft, ofVec2f topRight, ofVec2f middle, ofVec2f bottom) {
+void Corner::setCalibrationPoints(vector<ofVec2f> points) {
+  calibration = points;
+  updateTexCoords();
+}
 
-  calibration.topLeft = topLeft;
-  calibration.topRight = topRight;
-  calibration.middle = middle;
-  calibration.bottom = bottom;
+void Corner::setCalibrationPoint(int index, ofVec2f point) {
+  calibration[index] = point;
+}
+
+vector<ofVec2f> Corner::getCalibrationPoints() {
+  return calibration;
+}
+
+void Corner::toggleWireframe(bool b) {
+  bWireframe = b;
+}
+
+
+void Corner::updateTexCoords() {
 
   cornerMesh.clearTexCoords();
-  
+
   // right tri
-  cornerMesh.addTexCoord(calibration.middle);
-  cornerMesh.addTexCoord(calibration.topRight);
-  cornerMesh.addTexCoord(calibration.bottom);
+  cornerMesh.addTexCoord(calibration[2]);
+  cornerMesh.addTexCoord(calibration[1]);
+  cornerMesh.addTexCoord(calibration[3]);
   
   // left tri
-  cornerMesh.addTexCoord(calibration.middle);
-  cornerMesh.addTexCoord(calibration.topLeft);
-  cornerMesh.addTexCoord(calibration.bottom);
+  cornerMesh.addTexCoord(calibration[2]);
+  cornerMesh.addTexCoord(calibration[0]);
+  cornerMesh.addTexCoord(calibration[3]);
   
   // bottom tri
-  cornerMesh.addTexCoord(calibration.middle);
-  cornerMesh.addTexCoord(calibration.topLeft);
-  cornerMesh.addTexCoord(calibration.topRight);
-
+  cornerMesh.addTexCoord(calibration[2]);
+  cornerMesh.addTexCoord(calibration[0]);
+  cornerMesh.addTexCoord(calibration[1]);
 }

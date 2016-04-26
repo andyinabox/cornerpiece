@@ -6,39 +6,29 @@
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetVerticalSync(true);
-
-	// this uses depth information for occlusion
-	// rather than always drawing things on top of each other
-//	ofEnableDepthTest();
+  ofSetFrameRate(30);
 	
-	// ofBox uses texture coordinates from 0-1, so you can load whatever
-	// sized images you want and still use them to texture your box
-	// but we have to explicitly normalize our tex coords here
+  // is this actually what I want?
 	ofEnableNormalizedTexCoords();
+
+  cameraMovement.addListener(this, &ofApp::toggleCameraMovement);
+  drawWireframe.addListener(this, &ofApp::toggleWireframe);
 
   gui.setup("controls", "setting.xml", ofGetWidth() - 250, 0);
   gui.add(drawWireframe.setup("Draw wireframe", false));
-//  gui.add(useVideo.setup("Use video", true));
   gui.add(showCalibration.setup("Show calibration", false));
+  gui.add(cameraMovement.setup("Enable camera movement", true));
 
-  // create default calibration points
-//  cPoints.push_back(ofVec2f(0, 0));
-//  cPoints.push_back(ofVec2f(1, 0));
-//  cPoints.push_back(ofVec2f(0.5, 0.5));
-//  cPoints.push_back(ofVec2f(0.5, 1));
-
-//  image.load("corner-1024.jpg");
-
-  corner.setup();
+  corner.setup(100);
   
   vid.load("videos/corner-1024.mov");
 	vid.setLoopState(OF_LOOP_NORMAL);
-
+  vid.update();
+  corner.setTexture(vid.getTexture());
+  
   cam.setGlobalPosition(115, 115, 115);
   cam.lookAt(corner);
   cam.roll(180);
-
-//  corner.toggleRotation();
   
   cRect.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
   cRect.addVertex(ofPoint(0, 0, 0));
@@ -60,31 +50,12 @@ void ofApp::setup(){
 
 //--------------------------------------------------------------
 void ofApp::update(){
-  vid.update();
-  corner.setTexture(vid.getTexture());
 
-//  if(useVideo) {
-//    vid.update();
-//    tex = vid.getTexture();
-//  } else {
-//    tex = image.getTexture();
+//  if(vid.isFrameNew()) {
+    vid.update();
+    corner.setTexture(vid.getTexture());
 //  }
-//
-//  
-//  tri1.clearTexCoords();
-//  tri1.addTexCoord(cPoints[2]);
-//  tri1.addTexCoord(cPoints[1]);
-//  tri1.addTexCoord(cPoints[3]);
-//  
-//  tri2.clearTexCoords();
-//  tri2.addTexCoord(cPoints[2]);
-//  tri2.addTexCoord(cPoints[0]);
-//  tri2.addTexCoord(cPoints[3]);
-//  
-//  tri3.clearTexCoords();
-//  tri3.addTexCoord(cPoints[2]);
-//  tri3.addTexCoord(cPoints[0]);
-//  tri3.addTexCoord(cPoints[1]);
+
 }
 
 //--------------------------------------------------------------
@@ -101,36 +72,23 @@ void ofApp::draw(){
         cRect.draw();
       vid.getTexture().unbind();
     
-//      for(ofVec2f p : cPoints) {
-//        ofDrawEllipse(
-//          ofMap(p.x, 0, 1, 0, CAL_IMG_SCALE)
-//          , ofMap(p.y, 0, 1, 0, CAL_IMG_SCALE)
-//          , CAL_HANDLE_SIZE
-//          , CAL_HANDLE_SIZE
-//        );
-//      }
+    vector<ofVec2f> points = corner.getCalibrationPoints();
+    
+      for(ofVec2f p : points) {
+        ofDrawEllipse(
+          ofMap(p.x, 0, 1, 0, CAL_IMG_SCALE)
+          , ofMap(p.y, 0, 1, 0, CAL_IMG_SCALE)
+          , CAL_HANDLE_SIZE
+          , CAL_HANDLE_SIZE
+        );
+      }
     
     ofPopMatrix();
   } else {
     ofEnableDepthTest();
     cam.begin();
-//    
-//      if(drawWireframe) {
-//        tri1.drawWireframe();
-//        tri2.drawWireframe();
-//        tri3.drawWireframe();
-//      } else {
-//        tex.bind();
-//        tri1.draw();
-//        tri2.draw();
-//        tri3.draw();
-//        tex.unbind();
-//      }
-//    
       corner.draw(cam);
-
     cam.end();
-    
     
     ofDisableDepthTest();
   }
@@ -142,6 +100,19 @@ void ofApp::draw(){
   }
 
 }
+
+void ofApp::toggleCameraMovement(bool &value) {
+  if(value) {
+    cam.enableMouseInput();
+  } else {
+    cam.disableMouseInput();
+  }
+}
+
+void ofApp::toggleWireframe(bool &value) {
+  corner.toggleWireframe(value);
+}
+
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
@@ -158,21 +129,21 @@ void ofApp::keyPressed(int key){
   }
   
   
-//  if(key == '0') {
-//    cIndex = 0;
-//  }
-//  
-//  if(key == '1') {
-//    cIndex = 1;
-//  }
-//
-//  if(key == '2') {
-//    cIndex = 2;
-//  }
-//  
-//  if(key == '3') {
-//    cIndex = 3;
-//  }
+  if(key == '0') {
+    cIndex = 0;
+  }
+  
+  if(key == '1') {
+    cIndex = 1;
+  }
+
+  if(key == '2') {
+    cIndex = 2;
+  }
+  
+  if(key == '3') {
+    cIndex = 3;
+  }
   
   if(key == ' ') {
     if(vid.isPlaying()) {
@@ -195,10 +166,12 @@ void ofApp::mouseMoved(int x, int y ){
 
 //--------------------------------------------------------------
 void ofApp::mouseDragged(int x, int y, int button){
-//  if(showCalibration) {
-//    cPoints[cIndex].x = ofMap(x, 0, CAL_IMG_SCALE, 0, 1);
-//    cPoints[cIndex].y = ofMap(y, 0, CAL_IMG_SCALE, 0, 1);
-//  }
+  if(showCalibration) {
+    corner.setCalibrationPoint(cIndex, ofVec2f(
+      ofMap(x, 0, CAL_IMG_SCALE, 0, 1)
+      , ofMap(y, 0, CAL_IMG_SCALE, 0, 1)
+    ));
+  }
 }
 
 //--------------------------------------------------------------
