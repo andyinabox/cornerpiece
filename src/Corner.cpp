@@ -90,7 +90,9 @@ void Corner::setCalibrationPoints(vector<ofVec2f> points) {
 }
 
 void Corner::setCalibrationPoint(int index, ofVec2f point) {
+  cout << "set calibration point " << index << endl;
   calibration[index] = point;
+  updateTexCoords();
 }
 
 vector<ofVec2f> Corner::getCalibrationPoints() {

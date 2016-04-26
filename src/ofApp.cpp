@@ -21,7 +21,7 @@ void ofApp::setup(){
 
   corner.setup(100);
   
-  vid.load("videos/corner-1024.mov");
+  vid.load("videos/CornerAnimation1.mov");
 	vid.setLoopState(OF_LOOP_NORMAL);
   vid.update();
   corner.setTexture(vid.getTexture());
@@ -156,8 +156,8 @@ void ofApp::keyPressed(int key){
   
   if(key == ' ') {
     if(vid.isPlaying()) {
-      vid.stop();
-    } else if (vid.isInitialized()) {
+      vid.setPaused(!vid.isPaused());
+    } else {
       vid.play();
     }
   }

@@ -4,6 +4,11 @@ Cornerpiece
 Release Notes
 --------------
 
+### 0.2.1
+
+ * Fix bug with setting calibration
+
+
 ### 0.2.0
 
  * Broke corner out into separate class
