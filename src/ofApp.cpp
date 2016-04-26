@@ -68,21 +68,30 @@ void ofApp::draw(){
     
     ofPushMatrix();
       ofSetColor(255);
+    
       vid.getTexture().bind();
         cRect.draw();
       vid.getTexture().unbind();
     
-    vector<ofVec2f> points = corner.getCalibrationPoints();
+      vector<ofVec2f> points = corner.getCalibrationPoints();
     
-      for(ofVec2f p : points) {
-        ofDrawEllipse(
-          ofMap(p.x, 0, 1, 0, CAL_IMG_SCALE)
-          , ofMap(p.y, 0, 1, 0, CAL_IMG_SCALE)
-          , CAL_HANDLE_SIZE
-          , CAL_HANDLE_SIZE
-        );
+      for(int i = 0; i < points.size(); i++) {
+      
+        ofPushStyle();
+          if(i == cIndex) {
+            ofSetColor(0, 0, 255);
+          }
+        
+          ofDrawEllipse(
+            ofMap(points[i].x, 0, 1, 0, CAL_IMG_SCALE)
+            , ofMap(points[i].y, 0, 1, 0, CAL_IMG_SCALE)
+            , CAL_HANDLE_SIZE
+            , CAL_HANDLE_SIZE
+          );
+        ofPopStyle();
       }
-    
+      string text = "Currently selected point no. " + ofToString(cIndex) + ". Use 0-3 on your keyboard to modify selected.";
+      ofDrawBitmapStringHighlight(text, 0, CAL_IMG_SCALE+30);
     ofPopMatrix();
   } else {
     ofEnableDepthTest();
