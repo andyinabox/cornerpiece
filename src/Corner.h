@@ -26,7 +26,7 @@ class Corner : public ofNode {
     void setCalibrationPoints(vector<ofVec2f> points);
     void setCalibrationPoint(int index, ofVec2f point);
   
-    void setLabels(vector<string> labels);
+    void setLabels(string left, string right, string top);
   
     vector<ofVec2f> getCalibrationPoints();
   

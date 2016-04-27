@@ -15,7 +15,10 @@ void Corner::setup(float s) {
   setGlobalPosition(0, 0, 0);
 
   // load font
-  textFont.load("fonts/HWYGOTH.TTF", scale/10, true, true, true);
+  textFont.load("fonts/Didot.ttf", scale/15);
+//  textFont.load("fonts/Fanwood.otf", scale/12);
+//  textFont.load("fonts/Raleway-Thin.otf", scale/15);
+//  textFont.load("fonts/Lato-Hairline.ttf", scale/12);
 
 
   // create base triangle
@@ -55,11 +58,9 @@ void Corner::setup(float s) {
   setCalibrationPoints(c);
   
   // default labels
-  vector<string> l;
-  l.push_back("LEFT");
-  l.push_back("RIGHT");
-  l.push_back("TOP");
-  setLabels(l);
+  cornerLabels.push_back("TOP");
+  cornerLabels.push_back("RIGHT");
+  cornerLabels.push_back("LEFT");
   
   manipulator.toggleRotation();
 }
@@ -78,6 +79,7 @@ void Corner::draw(ofCamera cam) {
       cornerMesh.drawWireframe();
     } else {
       texture.bind();
+        ofSetColor(255);
         cornerMesh.draw();
       texture.unbind();
     }
@@ -95,26 +97,32 @@ void Corner::draw(ofCamera cam) {
 }
 
 void Corner::drawLabels() {
-      
+  
+  ofPushMatrix();
+//    ofSetColor(255, 255, 255, 100);
   // draw text
-  ofPushMatrix();
-    ofTranslate(scale/2, scale/2, 0);
-    ofRotateZ(-45);
-    textFont.drawStringCentered(cornerLabels[0], 0, 0);
-  ofPopMatrix();
-  
-  ofPushMatrix();
-    ofTranslate(0, scale/2, scale/2);
-    ofRotateY(90);
-    ofRotateZ(45);
-    textFont.drawStringCentered(cornerLabels[1], 0, 0);
-  ofPopMatrix();
-  
-  ofPushMatrix();
-    ofTranslate(scale/2, 0, scale/2);
-      ofRotateX(-90);
-      ofRotateZ(-135);
-    textFont.drawStringCentered(cornerLabels[2], 0, 0);
+    ofPushMatrix();
+      ofTranslate(scale/2, scale/2, 0);
+//      ofTranslate(scale/3, scale/2, 1);
+      ofRotateZ(-45);
+      textFont.drawStringCentered(ofToUpper(cornerLabels[0]), 0, 0);
+    ofPopMatrix();
+    
+    ofPushMatrix();
+      ofTranslate(0, scale/2, scale/2);
+//      ofTranslate(1, scale/3, scale/2);
+      ofRotateY(90);
+      ofRotateZ(45);
+      textFont.drawStringCentered(ofToUpper(cornerLabels[1]), 0, 0);
+    ofPopMatrix();
+    
+    ofPushMatrix();
+      ofTranslate(scale/2, 0, scale/2);
+//      ofTranslate(scale/2, 1, scale/3);
+        ofRotateX(-90);
+        ofRotateZ(-135);
+      textFont.drawStringCentered(ofToUpper(cornerLabels[2]), 0, 0);
+    ofPopMatrix();
   ofPopMatrix();
 }
 
@@ -134,8 +142,10 @@ void Corner::setCalibrationPoint(int index, ofVec2f point) {
   updateTexCoords();
 }
 
-void Corner::setLabels(vector<string> labels) {
-  cornerLabels = labels;
+void Corner::setLabels(string top, string right, string left) {
+  cornerLabels[0] = left;
+  cornerLabels[1] = right;
+  cornerLabels[2] = top;
 }
 
 vector<ofVec2f> Corner::getCalibrationPoints() {

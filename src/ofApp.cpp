@@ -11,6 +11,8 @@ void ofApp::setup(){
   // is this actually what I want?
 	ofEnableNormalizedTexCoords();
   
+  labels.load("threes.csv");
+  
 //  font.load("fonts/Helvetica.ttf", 30, true, true, true);
 
   cameraMovement.addListener(this, &ofApp::toggleCameraMovement);
@@ -25,7 +27,8 @@ void ofApp::setup(){
   gui.add(showLabels.setup("Show labels", true));
 
 
-  corner.setup(300);
+  corner.setup(350);
+  nextLabels();
   
   vid.load("videos/CornerAnimation1.mov");
 	vid.setLoopState(OF_LOOP_NORMAL);
@@ -135,6 +138,17 @@ void ofApp::toggleLabels(bool &value) {
 }
 
 
+void ofApp::nextLabels() {
+  labelsIndex++;
+  if(labelsIndex > labels.getNumRows()-1) {
+    labelsIndex = 0;
+  }
+  
+  ofxCsvRow row = labels.getRow(labelsIndex);
+  corner.setLabels(row[0], row[1], row[2]);
+}
+
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
   if(key == 'g') {
@@ -172,6 +186,10 @@ void ofApp::keyPressed(int key){
     } else {
       vid.play();
     }
+  }
+  
+  if(key == 'l') {
+    nextLabels();
   }
 }
 

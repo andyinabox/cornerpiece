@@ -2,6 +2,7 @@
 
 #include "ofMain.h"
 #include "ofxGui.h"
+#include "ofxCsv.h"
 #include "Corner.h"
 
 class ofApp : public ofBaseApp{
@@ -14,6 +15,8 @@ class ofApp : public ofBaseApp{
     void toggleCameraMovement(bool &value);
     void toggleWireframe(bool &value);
     void toggleLabels(bool &value);
+  
+    void nextLabels();
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -42,6 +45,9 @@ class ofApp : public ofBaseApp{
     ofxToggle showCalibration;
     ofxToggle cameraMovement;
     ofxToggle showLabels;
+  
+    ofxCsv labels;
+    int labelsIndex = -1;
   
 //    ofTrueTypeFont font;
 };
