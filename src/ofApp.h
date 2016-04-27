@@ -13,6 +13,7 @@ class ofApp : public ofBaseApp{
   
     void toggleCameraMovement(bool &value);
     void toggleWireframe(bool &value);
+    void toggleLabels(bool &value);
 
 		void keyPressed(int key);
 		void keyReleased(int key);
@@ -40,6 +41,7 @@ class ofApp : public ofBaseApp{
     ofxToggle drawWireframe;
     ofxToggle showCalibration;
     ofxToggle cameraMovement;
+    ofxToggle showLabels;
   
 //    ofTrueTypeFont font;
 };

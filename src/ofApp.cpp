@@ -15,11 +15,15 @@ void ofApp::setup(){
 
   cameraMovement.addListener(this, &ofApp::toggleCameraMovement);
   drawWireframe.addListener(this, &ofApp::toggleWireframe);
+  showLabels.addListener(this, &ofApp::toggleLabels);
+
 
   gui.setup("controls", "setting.xml", ofGetWidth() - 250, 0);
   gui.add(drawWireframe.setup("Draw wireframe", false));
   gui.add(showCalibration.setup("Show calibration", false));
   gui.add(cameraMovement.setup("Enable camera movement", true));
+  gui.add(showLabels.setup("Show labels", true));
+
 
   corner.setup(300);
   
@@ -124,6 +128,10 @@ void ofApp::toggleCameraMovement(bool &value) {
 
 void ofApp::toggleWireframe(bool &value) {
   corner.toggleWireframe(value);
+}
+
+void ofApp::toggleLabels(bool &value) {
+  corner.toggleLabels(value);
 }
 
 

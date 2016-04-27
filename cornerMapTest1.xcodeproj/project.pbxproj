@@ -55,6 +55,7 @@
 /* Begin PBXFileReference section */
 		C10AB42B1CCDBB5B00FB20C1 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		C10AB42C1CCDBB5B00FB20C1 /* VERSION */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = VERSION; sourceTree = "<group>"; };
+		C14FDB511CD149BA009897CD /* ofxCenteredTrueTypeFont.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxCenteredTrueTypeFont.h; sourceTree = "<group>"; };
 		C18C2DA41CC653F10004DC24 /* ofxBaseGui.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxBaseGui.cpp; sourceTree = "<group>"; };
 		C18C2DA51CC653F10004DC24 /* ofxBaseGui.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxBaseGui.h; sourceTree = "<group>"; };
 		C18C2DA61CC653F10004DC24 /* ofxButton.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxButton.cpp; sourceTree = "<group>"; };
@@ -110,8 +111,26 @@
 			children = (
 				C18C2DA21CC653F10004DC24 /* ofxGui */,
 				C1E7711F1CCEADDE004DEE3E /* ofxManipulator */,
+				C14FDB4F1CD149BA009897CD /* ofxCenteredTrueTypeFont */,
 			);
 			name = addons;
+			sourceTree = "<group>";
+		};
+		C14FDB4F1CD149BA009897CD /* ofxCenteredTrueTypeFont */ = {
+			isa = PBXGroup;
+			children = (
+				C14FDB501CD149BA009897CD /* src */,
+			);
+			name = ofxCenteredTrueTypeFont;
+			sourceTree = "<group>";
+		};
+		C14FDB501CD149BA009897CD /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C14FDB511CD149BA009897CD /* ofxCenteredTrueTypeFont.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxCenteredTrueTypeFont/src;
 			sourceTree = "<group>";
 		};
 		C18C2DA21CC653F10004DC24 /* ofxGui */ = {

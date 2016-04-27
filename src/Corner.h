@@ -14,8 +14,7 @@
 #endif /* defined(__cornerMapTest1__Corner__) */
 
 #include "ofxManipulator.h"
-
-#define FONT_SIZE 10
+#include "ofxCenteredTrueTypeFont.h"
 
 class Corner : public ofNode {
   public:
@@ -32,6 +31,7 @@ class Corner : public ofNode {
     vector<ofVec2f> getCalibrationPoints();
   
     void toggleWireframe(bool b);
+    void toggleLabels(bool b);
   
     bool bWireframe = false;
     bool bLabels = true;
@@ -41,7 +41,7 @@ class Corner : public ofNode {
     ofxManipulator manipulator;
     ofTexture texture;
     ofMesh cornerMesh;
-    ofTrueTypeFont textFont;
+    ofxCenteredTrueTypeFont textFont;
   
     vector<string> cornerLabels;
   

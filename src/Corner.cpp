@@ -15,7 +15,7 @@ void Corner::setup(float s) {
   setGlobalPosition(0, 0, 0);
 
   // load font
-  textFont.load("fonts/Helvetica.ttf", scale/10, true, true, true);
+  textFont.load("fonts/HWYGOTH.TTF", scale/10, true, true, true);
 
 
   // create base triangle
@@ -100,21 +100,21 @@ void Corner::drawLabels() {
   ofPushMatrix();
     ofTranslate(scale/2, scale/2, 0);
     ofRotateZ(-45);
-    textFont.drawString(cornerLabels[0], 0, 0);
+    textFont.drawStringCentered(cornerLabels[0], 0, 0);
   ofPopMatrix();
   
   ofPushMatrix();
     ofTranslate(0, scale/2, scale/2);
     ofRotateY(90);
     ofRotateZ(45);
-    textFont.drawString(cornerLabels[1], 0, 0);
+    textFont.drawStringCentered(cornerLabels[1], 0, 0);
   ofPopMatrix();
   
   ofPushMatrix();
     ofTranslate(scale/2, 0, scale/2);
       ofRotateX(-90);
       ofRotateZ(-135);
-    textFont.drawString(cornerLabels[2], 0, 0);
+    textFont.drawStringCentered(cornerLabels[2], 0, 0);
   ofPopMatrix();
 }
 
@@ -145,6 +145,11 @@ vector<ofVec2f> Corner::getCalibrationPoints() {
 void Corner::toggleWireframe(bool b) {
   bWireframe = b;
 }
+
+void Corner::toggleLabels(bool b) {
+  bLabels = b;
+}
+
 
 
 void Corner::updateTexCoords() {
