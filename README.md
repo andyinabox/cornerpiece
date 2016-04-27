@@ -4,6 +4,10 @@ Cornerpiece
 Release Notes
 --------------
 
+### 0.2.2
+
+ * Added labels
+
 ### 0.2.1
 
  * Fix bug with setting calibration
