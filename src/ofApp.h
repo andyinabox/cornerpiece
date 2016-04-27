@@ -41,5 +41,5 @@ class ofApp : public ofBaseApp{
     ofxToggle showCalibration;
     ofxToggle cameraMovement;
   
-  
+//    ofTrueTypeFont font;
 };

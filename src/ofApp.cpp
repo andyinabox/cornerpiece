@@ -10,6 +10,8 @@ void ofApp::setup(){
 	
   // is this actually what I want?
 	ofEnableNormalizedTexCoords();
+  
+//  font.load("fonts/Helvetica.ttf", 30, true, true, true);
 
   cameraMovement.addListener(this, &ofApp::toggleCameraMovement);
   drawWireframe.addListener(this, &ofApp::toggleWireframe);
@@ -97,6 +99,8 @@ void ofApp::draw(){
     ofEnableDepthTest();
     cam.begin();
       corner.draw(cam);
+    
+//      font.drawStringAsShapes("Test", 10, 10);
     cam.end();
     
     ofDisableDepthTest();

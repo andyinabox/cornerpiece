@@ -15,6 +15,8 @@
 
 #include "ofxManipulator.h"
 
+#define FONT_SIZE 20
+
 class Corner : public ofNode {
   public:
     void setup(float scale);
@@ -35,6 +37,7 @@ class Corner : public ofNode {
     ofxManipulator manipulator;
     ofTexture texture;
     ofMesh cornerMesh;
+    ofTrueTypeFont textFont;
   
   protected:
   

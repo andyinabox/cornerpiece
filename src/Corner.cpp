@@ -14,6 +14,10 @@ void Corner::setup(float scale) {
 
   setGlobalPosition(0, 0, 0);
 
+  // load font
+  textFont.load("fonts/Helvetica.ttf", FONT_SIZE, true, true, true);
+
+
   // create base triangle
   cornerMesh.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
   
@@ -70,6 +74,12 @@ void Corner::draw(ofCamera cam) {
       texture.bind();
         cornerMesh.draw();
       texture.unbind();
+      
+      ofPushMatrix();
+        ofTranslate(0, 0, 1);
+        ofRotate(180);
+        textFont.drawStringAsShapes("Test", 0, 0);
+      ofPopMatrix();
     }
     
   ofPopMatrix();
