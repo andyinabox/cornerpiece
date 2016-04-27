@@ -8,14 +8,14 @@
 
 #include "Corner.h"
 
-void Corner::setup(float scale) {
+void Corner::setup(float s) {
 
-  scale = scale;
+  scale = s;
 
   setGlobalPosition(0, 0, 0);
 
   // load font
-  textFont.load("fonts/Helvetica.ttf", FONT_SIZE, true, true, true);
+  textFont.load("fonts/Helvetica.ttf", scale/10, true, true, true);
 
 
   // create base triangle
@@ -52,8 +52,14 @@ void Corner::setup(float scale) {
   c.push_back(ofVec2f(1, 0));
   c.push_back(ofVec2f(0.5, 0.5));
   c.push_back(ofVec2f(0.5, 1));
-  
   setCalibrationPoints(c);
+  
+  // default labels
+  vector<string> l;
+  l.push_back("LEFT");
+  l.push_back("RIGHT");
+  l.push_back("TOP");
+  setLabels(l);
   
   manipulator.toggleRotation();
 }
@@ -74,12 +80,10 @@ void Corner::draw(ofCamera cam) {
       texture.bind();
         cornerMesh.draw();
       texture.unbind();
-      
-      ofPushMatrix();
-        ofTranslate(0, 0, 1);
-        ofRotate(180);
-        textFont.drawStringAsShapes("Test", 0, 0);
-      ofPopMatrix();
+    }
+  
+    if(bLabels) {
+      drawLabels();
     }
     
   ofPopMatrix();
@@ -89,6 +93,31 @@ void Corner::draw(ofCamera cam) {
   }
 
 }
+
+void Corner::drawLabels() {
+      
+  // draw text
+  ofPushMatrix();
+    ofTranslate(scale/2, scale/2, 0);
+    ofRotateZ(-45);
+    textFont.drawString(cornerLabels[0], 0, 0);
+  ofPopMatrix();
+  
+  ofPushMatrix();
+    ofTranslate(0, scale/2, scale/2);
+    ofRotateY(90);
+    ofRotateZ(45);
+    textFont.drawString(cornerLabels[1], 0, 0);
+  ofPopMatrix();
+  
+  ofPushMatrix();
+    ofTranslate(scale/2, 0, scale/2);
+      ofRotateX(-90);
+      ofRotateZ(-135);
+    textFont.drawString(cornerLabels[2], 0, 0);
+  ofPopMatrix();
+}
+
 
 void Corner::setTexture(ofTexture tex) {
   texture = tex;
@@ -100,9 +129,13 @@ void Corner::setCalibrationPoints(vector<ofVec2f> points) {
 }
 
 void Corner::setCalibrationPoint(int index, ofVec2f point) {
-  cout << "set calibration point " << index << endl;
+//  cout << "set calibration point " << index << endl;
   calibration[index] = point;
   updateTexCoords();
+}
+
+void Corner::setLabels(vector<string> labels) {
+  cornerLabels = labels;
 }
 
 vector<ofVec2f> Corner::getCalibrationPoints() {

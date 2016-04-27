@@ -21,7 +21,7 @@ void ofApp::setup(){
   gui.add(showCalibration.setup("Show calibration", false));
   gui.add(cameraMovement.setup("Enable camera movement", true));
 
-  corner.setup(100);
+  corner.setup(300);
   
   vid.load("videos/CornerAnimation1.mov");
 	vid.setLoopState(OF_LOOP_NORMAL);
