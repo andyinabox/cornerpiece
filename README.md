@@ -4,6 +4,10 @@ Cornerpiece
 Release Notes
 --------------
 
+### 0.2.3
+
+ * Loading label data
+
 ### 0.2.2
 
  * Added labels
