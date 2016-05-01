@@ -15,8 +15,10 @@ class ofApp : public ofBaseApp{
     void toggleCameraMovement(bool &value);
     void toggleWireframe(bool &value);
     void toggleLabels(bool &value);
-  
     void nextLabels();
+  
+    void saveSettings();
+    void loadSettings();
 
 		void keyPressed(int key);
 		void keyReleased(int key);

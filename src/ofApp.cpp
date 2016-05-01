@@ -55,6 +55,8 @@ void ofApp::setup(){
   cRect.addTexCoord(ofVec2f(1, 1));
   cRect.addTexCoord(ofVec2f(0, 1));
   
+  loadSettings();
+  
 }
 
 //--------------------------------------------------------------
@@ -149,6 +151,59 @@ void ofApp::nextLabels() {
 }
 
 
+void ofApp::saveSettings() {
+  ofXml rootXml;
+  
+  rootXml.addChild("settings");
+  rootXml.setTo("//settings");
+  
+  // save calibration
+  ofXml calibrationXml;
+  calibrationXml.addChild("calibration");
+  calibrationXml.setTo("//calibration");
+  vector<ofVec2f> calibrationPoints = corner.getCalibrationPoints();
+  
+  for(int i = 0; i < calibrationPoints.size(); i++) {
+    ofXml point;
+    point.addChild("point");
+    point.setTo("//point");
+    
+    point.setAttribute("index", ofToString(i));
+    point.setAttribute("x", ofToString(calibrationPoints[i].x));
+    point.setAttribute("y", ofToString(calibrationPoints[i].y));
+
+    calibrationXml.addXml(point);
+  }
+  
+  rootXml.addXml(calibrationXml);
+  
+  // save corner orientation
+  
+  // save camera orientation
+
+  rootXml.save("settings.xml");
+
+}
+
+
+void ofApp::loadSettings() {
+  ofXml xml;
+  
+  if(xml.load("settings.xml")) {
+    if (xml.exists("//calibration")) {
+      xml.setTo("//calibration");
+      for(int i = 0; i < xml.getNumChildren(); i++) {
+        xml.setToChild(i);
+        map<string, string> attr = xml.getAttributes();
+        corner.setCalibrationPoint(i, ofVec2f(ofToFloat(attr["x"]), ofToFloat(attr["y"])));
+        xml.setToParent();
+      }
+    }
+  
+  }
+
+}
+
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
   if(key == 'g') {
@@ -163,6 +218,10 @@ void ofApp::keyPressed(int key){
     drawWireframe = !drawWireframe;
   }
   
+  if(key == 's') {
+    ofLogNotice("'s' key") << "Savings settings";
+    saveSettings();
+  }
   
   if(key == '0') {
     cIndex = 0;
@@ -210,6 +269,7 @@ void ofApp::mouseDragged(int x, int y, int button){
       ofMap(x, 0, CAL_IMG_SCALE, 0, 1)
       , ofMap(y, 0, CAL_IMG_SCALE, 0, 1)
     ));
+//    saveSettings();
   }
 }
 

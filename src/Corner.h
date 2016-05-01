@@ -25,9 +25,8 @@ class Corner : public ofNode {
     void setTexture(ofTexture tex);
     void setCalibrationPoints(vector<ofVec2f> points);
     void setCalibrationPoint(int index, ofVec2f point);
-  
     void setLabels(string left, string right, string top);
-  
+
     vector<ofVec2f> getCalibrationPoints();
   
     void toggleWireframe(bool b);
