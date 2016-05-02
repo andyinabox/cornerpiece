@@ -1,8 +1,5 @@
 #include "ofApp.h"
 
-#define CAL_IMG_SCALE 512
-#define CAL_HANDLE_SIZE 7
-#define CAL_POINT_GRAB_DIST 10
 //--------------------------------------------------------------
 void ofApp::setup(){
 	ofSetVerticalSync(true);
@@ -11,7 +8,6 @@ void ofApp::setup(){
   // is this actually what I want?
 	ofEnableNormalizedTexCoords();
   
-  labels.load(labelsPath);
   
 //  font.load("fonts/Helvetica.ttf", 30, true, true, true);
 
@@ -25,9 +21,12 @@ void ofApp::setup(){
   gui.add(showCalibration.setup("Show calibration", false));
   gui.add(cameraMovement.setup("Enable camera movement", false));
   gui.add(showLabels.setup("Show labels", true));
+  gui.loadFromFile(guiSettingsPath);
 
+  corner.setup(CORNER_SCALE);
+  screen.setup(CAL_IMG_SCALE, CAL_IMG_SCALE, false);
 
-  corner.setup(350);
+  labels.load(labelsPath);
   nextLabels();
   
   vid.load("videos/CornerAnimation1.mov");
@@ -35,27 +34,10 @@ void ofApp::setup(){
   vid.update();
   corner.setTexture(vid.getTexture());
   
-  
-  ofxLoadCamera(cam, camSettingsPath);
-  
-  cRect.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
-  cRect.addVertex(ofPoint(0, 0, 0));
-  cRect.addVertex(ofPoint(CAL_IMG_SCALE, 0, 0));
-  cRect.addVertex(ofPoint(CAL_IMG_SCALE, CAL_IMG_SCALE, 0));
-  cRect.addVertex(ofPoint(0, CAL_IMG_SCALE, 0));
-  
-  cRect.addIndex(0);
-  cRect.addIndex(1);
-  cRect.addIndex(2);
-  cRect.addIndex(3);
-
-  cRect.addTexCoord(ofVec2f(0, 0));
-  cRect.addTexCoord(ofVec2f(1, 0));
-  cRect.addTexCoord(ofVec2f(1, 1));
-  cRect.addTexCoord(ofVec2f(0, 1));
+  resetCamera();
   
   loadSettings();
-  
+  cameraMovement = false;
 }
 
 //--------------------------------------------------------------
@@ -80,7 +62,7 @@ void ofApp::draw(){
       ofSetColor(255);
     
       vid.getTexture().bind();
-        cRect.draw();
+        screen.draw();
       vid.getTexture().unbind();
     
       vector<ofVec2f> points = corner.getCalibrationPoints();
@@ -198,7 +180,7 @@ void ofApp::saveSettings() {
   ofxSaveCamera(cam, camSettingsPath);
 
   rootXml.save(xmlSettingsPath);
-
+  gui.saveToFile(guiSettingsPath);
 }
 
 
@@ -231,6 +213,8 @@ void ofApp::loadSettings() {
     
   
   }
+
+  ofxLoadCamera(cam, camSettingsPath);
 
 }
 

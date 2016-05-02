@@ -82,6 +82,7 @@
 		C18C2DB41CC653F10004DC24 /* ofxToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxToggle.h; sourceTree = "<group>"; };
 		C18EE22A1CD78AEF008B5C56 /* ofxCameraSaveLoad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCameraSaveLoad.cpp; sourceTree = "<group>"; };
 		C18EE22B1CD78AEF008B5C56 /* ofxCameraSaveLoad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxCameraSaveLoad.h; sourceTree = "<group>"; };
+		C18EE22E1CD793DF008B5C56 /* ShaderScreen.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ShaderScreen.h; sourceTree = "<group>"; };
 		C19EAABD1CD6FEB1008476D9 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = bin/data; sourceTree = "<group>"; };
 		C1E771211CCEADDE004DEE3E /* ofxManipulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxManipulator.cpp; sourceTree = "<group>"; };
 		C1E771221CCEADDE004DEE3E /* ofxManipulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxManipulator.h; sourceTree = "<group>"; };
@@ -266,6 +267,7 @@
 				E4B69E1F0A3A1BDC003C02F2 /* ofApp.h */,
 				C1E771281CCEB843004DEE3E /* Corner.cpp */,
 				C1E771291CCEB843004DEE3E /* Corner.h */,
+				C18EE22E1CD793DF008B5C56 /* ShaderScreen.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

@@ -7,8 +7,13 @@
 #include "ofxCameraSaveLoad.h"
 
 #include "Corner.h"
+#include "ShaderScreen.h"
 
 #define CAM_DISTANCE 400
+#define CORNER_SCALE 350
+#define CAL_IMG_SCALE 512
+#define CAL_HANDLE_SIZE 7
+#define CAL_POINT_GRAB_DIST 10
 
 class ofApp : public ofBaseApp{
 
@@ -53,7 +58,7 @@ class ofApp : public ofBaseApp{
     Corner corner;
   
     int cIndex = 0;
-    ofMesh cRect;
+    ShaderScreen screen;
   
     ofxPanel gui;
     ofxToggle drawWireframe;
