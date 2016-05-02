@@ -4,6 +4,11 @@ Cornerpiece
 Release Notes
 --------------
 
+### 0.3.0
+
+ * Now saving settings
+ * Use `ShaderScreen` for calibration
+
 ### 0.2.3
 
  * Loading label data
