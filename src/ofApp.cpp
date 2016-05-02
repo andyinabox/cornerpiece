@@ -11,7 +11,7 @@ void ofApp::setup(){
   // is this actually what I want?
 	ofEnableNormalizedTexCoords();
   
-  labels.load("threes.csv");
+  labels.load(labelsPath);
   
 //  font.load("fonts/Helvetica.ttf", 30, true, true, true);
 
@@ -20,7 +20,7 @@ void ofApp::setup(){
   showLabels.addListener(this, &ofApp::toggleLabels);
 
 
-  gui.setup("controls", "setting.xml", ofGetWidth() - 250, 0);
+  gui.setup("controls", guiSettingsPath, ofGetWidth() - 250, 0);
   gui.add(drawWireframe.setup("Draw wireframe", false));
   gui.add(showCalibration.setup("Show calibration", false));
   gui.add(cameraMovement.setup("Enable camera movement", false));
@@ -36,7 +36,7 @@ void ofApp::setup(){
   corner.setTexture(vid.getTexture());
   
   
-  ofxLoadCamera(cam, "camera");
+  ofxLoadCamera(cam, camSettingsPath);
   
   cRect.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
   cRect.addVertex(ofPoint(0, 0, 0));
@@ -195,9 +195,9 @@ void ofApp::saveSettings() {
   rootXml.addXml(cornerXml);
   
   // save camera orientation
-  ofxSaveCamera(cam, "camera");
+  ofxSaveCamera(cam, camSettingsPath);
 
-  rootXml.save("settings.xml");
+  rootXml.save(xmlSettingsPath);
 
 }
 
@@ -205,7 +205,7 @@ void ofApp::saveSettings() {
 void ofApp::loadSettings() {
   ofXml xml;
   
-  if(xml.load("settings.xml")) {
+  if(xml.load(xmlSettingsPath)) {
   
     // load texture coordinate calibration
     if (xml.exists("//calibration")) {

@@ -42,6 +42,11 @@ class ofApp : public ofBaseApp{
 
     bool showGui = true;
   
+    const string labelsPath = "threes.csv";
+    const string guiSettingsPath = "settings/gui.xml";
+    const string camSettingsPath = "settings/camera";
+    const string xmlSettingsPath = "settings/settings.xml";
+  
     ofVideoPlayer vid;
     ofLight light;
     ofEasyCam cam;

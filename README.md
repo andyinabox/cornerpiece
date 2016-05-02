@@ -30,5 +30,6 @@ Release Notes
 TODO
 -----
 
+- [x] Save settings
 - [ ] Make calibration keyframeable
 - [ ] Troubleshoot performance issues 
