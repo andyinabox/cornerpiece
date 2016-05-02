@@ -1,9 +1,14 @@
 #pragma once
 
 #include "ofMain.h"
+
 #include "ofxGui.h"
 #include "ofxCsv.h"
+#include "ofxCameraSaveLoad.h"
+
 #include "Corner.h"
+
+#define CAM_DISTANCE 400
 
 class ofApp : public ofBaseApp{
 
@@ -16,6 +21,9 @@ class ofApp : public ofBaseApp{
     void toggleWireframe(bool &value);
     void toggleLabels(bool &value);
     void nextLabels();
+  
+    void resetCamera();
+    void resetCorner();
   
     void saveSettings();
     void loadSettings();

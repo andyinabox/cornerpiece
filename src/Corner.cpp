@@ -180,6 +180,11 @@ void Corner::setMatrix(ofMatrix4x4 m) {
   setTransformMatrix(m);
 }
 
+void Corner::reset() {
+  resetTransform();
+  setMatrix(getGlobalTransformMatrix());
+}
+
 void Corner::toggleWireframe(bool b) {
   bWireframe = b;
 }

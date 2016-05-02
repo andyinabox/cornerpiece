@@ -35,9 +35,8 @@ void ofApp::setup(){
   vid.update();
   corner.setTexture(vid.getTexture());
   
-  cam.setGlobalPosition(115, 115, 115);
-  cam.lookAt(corner);
-  cam.roll(180);
+  
+  ofxLoadCamera(cam, "camera");
   
   cRect.setMode(OF_PRIMITIVE_TRIANGLE_FAN);
   cRect.addVertex(ofPoint(0, 0, 0));
@@ -150,6 +149,16 @@ void ofApp::nextLabels() {
   corner.setLabels(row[0], row[1], row[2]);
 }
 
+void ofApp::resetCamera() {
+  cam.setGlobalPosition(CAM_DISTANCE, CAM_DISTANCE, CAM_DISTANCE);
+  cam.lookAt(corner);
+  cam.roll(180);
+}
+
+void ofApp::resetCorner() {
+  corner.reset();
+}
+
 
 void ofApp::saveSettings() {
   ofXml rootXml;
@@ -186,6 +195,7 @@ void ofApp::saveSettings() {
   rootXml.addXml(cornerXml);
   
   // save camera orientation
+  ofxSaveCamera(cam, "camera");
 
   rootXml.save("settings.xml");
 
@@ -226,6 +236,7 @@ void ofApp::loadSettings() {
 
 //--------------------------------------------------------------
 void ofApp::keyPressed(int key){
+
   if(key == 'g') {
     showGui = !showGui;
   }
@@ -247,6 +258,12 @@ void ofApp::keyPressed(int key){
   if(key == 'o') {
     ofLogNotice("'o' key") << "Opening settings";
     loadSettings();
+  }
+  
+  if(key == 'r') {
+    ofLogNotice("'r' key") << "Reset settings";
+    resetCamera();
+    resetCorner();
   }
   
   if(key == '0') {

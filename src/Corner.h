@@ -31,6 +31,7 @@ class Corner : public ofNode {
   
     ofMatrix4x4 getMatrix();
     void setMatrix(ofMatrix4x4 m);
+    void reset();
   
     void toggleWireframe(bool b);
     void toggleLabels(bool b);

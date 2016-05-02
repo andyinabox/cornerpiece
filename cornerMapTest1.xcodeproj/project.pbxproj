@@ -18,6 +18,7 @@
 		C18C2DBA1CC653F10004DC24 /* ofxSlider.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18C2DAF1CC653F10004DC24 /* ofxSlider.cpp */; };
 		C18C2DBB1CC653F10004DC24 /* ofxSliderGroup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18C2DB11CC653F10004DC24 /* ofxSliderGroup.cpp */; };
 		C18C2DBC1CC653F10004DC24 /* ofxToggle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18C2DB31CC653F10004DC24 /* ofxToggle.cpp */; };
+		C18EE22C1CD78AEF008B5C56 /* ofxCameraSaveLoad.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C18EE22A1CD78AEF008B5C56 /* ofxCameraSaveLoad.cpp */; };
 		C1E771231CCEADDE004DEE3E /* ofxManipulator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1E771211CCEADDE004DEE3E /* ofxManipulator.cpp */; };
 		C1E7712A1CCEB843004DEE3E /* Corner.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C1E771281CCEB843004DEE3E /* Corner.cpp */; };
 		E4328149138ABC9F0047C5CB /* openFrameworksDebug.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E4328148138ABC890047C5CB /* openFrameworksDebug.a */; };
@@ -79,6 +80,8 @@
 		C18C2DB21CC653F10004DC24 /* ofxSliderGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxSliderGroup.h; sourceTree = "<group>"; };
 		C18C2DB31CC653F10004DC24 /* ofxToggle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxToggle.cpp; sourceTree = "<group>"; };
 		C18C2DB41CC653F10004DC24 /* ofxToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxToggle.h; sourceTree = "<group>"; };
+		C18EE22A1CD78AEF008B5C56 /* ofxCameraSaveLoad.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxCameraSaveLoad.cpp; sourceTree = "<group>"; };
+		C18EE22B1CD78AEF008B5C56 /* ofxCameraSaveLoad.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxCameraSaveLoad.h; sourceTree = "<group>"; };
 		C19EAABD1CD6FEB1008476D9 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = bin/data; sourceTree = "<group>"; };
 		C1E771211CCEADDE004DEE3E /* ofxManipulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxManipulator.cpp; sourceTree = "<group>"; };
 		C1E771221CCEADDE004DEE3E /* ofxManipulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxManipulator.h; sourceTree = "<group>"; };
@@ -120,6 +123,7 @@
 				C1E7711F1CCEADDE004DEE3E /* ofxManipulator */,
 				C14FDB4F1CD149BA009897CD /* ofxCenteredTrueTypeFont */,
 				C14FDB561CD1500A009897CD /* ofxCsv */,
+				C18EE2281CD78AEF008B5C56 /* ofxCameraSaveLoad */,
 			);
 			name = addons;
 			sourceTree = "<group>";
@@ -192,6 +196,24 @@
 			);
 			name = src;
 			path = ../../../addons/ofxGui/src;
+			sourceTree = "<group>";
+		};
+		C18EE2281CD78AEF008B5C56 /* ofxCameraSaveLoad */ = {
+			isa = PBXGroup;
+			children = (
+				C18EE2291CD78AEF008B5C56 /* src */,
+			);
+			name = ofxCameraSaveLoad;
+			sourceTree = "<group>";
+		};
+		C18EE2291CD78AEF008B5C56 /* src */ = {
+			isa = PBXGroup;
+			children = (
+				C18EE22A1CD78AEF008B5C56 /* ofxCameraSaveLoad.cpp */,
+				C18EE22B1CD78AEF008B5C56 /* ofxCameraSaveLoad.h */,
+			);
+			name = src;
+			path = ../../../addons/ofxCameraSaveLoad/src;
 			sourceTree = "<group>";
 		};
 		C1E7711F1CCEADDE004DEE3E /* ofxManipulator */ = {
@@ -355,6 +377,7 @@
 				C14FDB5C1CD1500A009897CD /* ofxCsv.cpp in Sources */,
 				C18C2DBA1CC653F10004DC24 /* ofxSlider.cpp in Sources */,
 				C18C2DBC1CC653F10004DC24 /* ofxToggle.cpp in Sources */,
+				C18EE22C1CD78AEF008B5C56 /* ofxCameraSaveLoad.cpp in Sources */,
 				C18C2DBB1CC653F10004DC24 /* ofxSliderGroup.cpp in Sources */,
 				C14FDB5D1CD1500A009897CD /* ofxCsvRow.cpp in Sources */,
 				C10AB42D1CCDBB5B00FB20C1 /* README.md in Sources */,
