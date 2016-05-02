@@ -1,0 +1,14 @@
+<settings>
+	<calibration>
+		<point index="0" x="0.0078125" y="0.240234"/>
+		<point index="1" x="0.992188" y="0.207031"/>
+		<point index="2" x="0.5" y="0.5"/>
+		<point index="3" x="0.529297" y="1.00391"/>
+	</calibration>
+	<corner>
+		<transform> 0.84983, 0.440128, -0.289958,        0
+-0.289958,  0.84983, 0.440128,        0
+0.440128, -0.289958,  0.84983,        0
+       0,        0,        0,        1</transform>
+	</corner>
+</settings>

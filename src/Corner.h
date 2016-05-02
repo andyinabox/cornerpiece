@@ -29,6 +29,9 @@ class Corner : public ofNode {
 
     vector<ofVec2f> getCalibrationPoints();
   
+    ofMatrix4x4 getMatrix();
+    void setMatrix(ofMatrix4x4 m);
+  
     void toggleWireframe(bool b);
     void toggleLabels(bool b);
   

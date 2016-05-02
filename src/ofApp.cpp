@@ -23,7 +23,7 @@ void ofApp::setup(){
   gui.setup("controls", "setting.xml", ofGetWidth() - 250, 0);
   gui.add(drawWireframe.setup("Draw wireframe", false));
   gui.add(showCalibration.setup("Show calibration", false));
-  gui.add(cameraMovement.setup("Enable camera movement", true));
+  gui.add(cameraMovement.setup("Enable camera movement", false));
   gui.add(showLabels.setup("Show labels", true));
 
 
@@ -178,6 +178,12 @@ void ofApp::saveSettings() {
   rootXml.addXml(calibrationXml);
   
   // save corner orientation
+  ofXml cornerXml;
+  cornerXml.addChild("corner");
+  cornerXml.setTo("//corner");
+  cornerXml.addValue("transform", ofToString(corner.getGlobalTransformMatrix()));
+  
+  rootXml.addXml(cornerXml);
   
   // save camera orientation
 
@@ -190,6 +196,8 @@ void ofApp::loadSettings() {
   ofXml xml;
   
   if(xml.load("settings.xml")) {
+  
+    // load texture coordinate calibration
     if (xml.exists("//calibration")) {
       xml.setTo("//calibration");
       for(int i = 0; i < xml.getNumChildren(); i++) {
@@ -199,6 +207,18 @@ void ofApp::loadSettings() {
         xml.setToParent();
       }
     }
+    
+    xml.setTo("//settings");
+    if(xml.exists("//corner/transform")) {
+      string matStr = xml.getValue("//corner/transform");
+      ofMatrix4x4 m;
+      istringstream iss;
+      iss.str(matStr);
+      iss >> m;
+      corner.setMatrix(m);
+    
+    }
+    
   
   }
 
@@ -221,6 +241,12 @@ void ofApp::keyPressed(int key){
   if(key == 's') {
     ofLogNotice("'s' key") << "Savings settings";
     saveSettings();
+  }
+  
+  
+  if(key == 'o') {
+    ofLogNotice("'o' key") << "Opening settings";
+    loadSettings();
   }
   
   if(key == '0') {

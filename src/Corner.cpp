@@ -68,12 +68,19 @@ void Corner::setup(float s) {
 
 void Corner::draw(ofCamera cam) {
   
-  manipulator.getRotation().getRotate(rotationAngle, rotationVector);
+  // set the global transform matrix for this ofNode
+  // from the manipulator
+  setTransformMatrix(manipulator.getMatrix());
+  getOrientationQuat().getRotate(rotationAngle, rotationVector);
   
+  
+  // seems kind of weird but it works!
   ofPushMatrix();
   
-    ofTranslate(manipulator.getTranslation());
+    // apply transform from this node
+    ofTranslate(getPosition());
     ofRotate(rotationAngle, rotationVector.x, rotationVector.y, rotationVector.z);
+    ofScale(getScale());
   
     if(bWireframe) {
       cornerMesh.drawWireframe();
@@ -150,6 +157,27 @@ void Corner::setLabels(string top, string right, string left) {
 
 vector<ofVec2f> Corner::getCalibrationPoints() {
   return calibration;
+}
+
+ofMatrix4x4 Corner::getMatrix() {
+  return manipulator.getMatrix();
+}
+
+void Corner::setMatrix(ofMatrix4x4 m) {
+  ofVec3f translation;
+  ofQuaternion rotation;
+  ofVec3f scale;
+  ofQuaternion so;
+  
+  m.decompose(translation, rotation, scale, so);
+  
+  // apply to manipulator
+  manipulator.setTranslation(translation);
+  manipulator.setRotation(rotation);
+  manipulator.setScale(scale);
+  
+  // set ofNode matrix
+  setTransformMatrix(m);
 }
 
 void Corner::toggleWireframe(bool b) {

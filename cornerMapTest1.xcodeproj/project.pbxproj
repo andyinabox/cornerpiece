@@ -79,6 +79,7 @@
 		C18C2DB21CC653F10004DC24 /* ofxSliderGroup.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxSliderGroup.h; sourceTree = "<group>"; };
 		C18C2DB31CC653F10004DC24 /* ofxToggle.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxToggle.cpp; sourceTree = "<group>"; };
 		C18C2DB41CC653F10004DC24 /* ofxToggle.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxToggle.h; sourceTree = "<group>"; };
+		C19EAABD1CD6FEB1008476D9 /* data */ = {isa = PBXFileReference; lastKnownFileType = folder; name = data; path = bin/data; sourceTree = "<group>"; };
 		C1E771211CCEADDE004DEE3E /* ofxManipulator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ofxManipulator.cpp; sourceTree = "<group>"; };
 		C1E771221CCEADDE004DEE3E /* ofxManipulator.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ofxManipulator.h; sourceTree = "<group>"; };
 		C1E771281CCEB843004DEE3E /* Corner.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = Corner.cpp; sourceTree = "<group>"; };
@@ -222,6 +223,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				C19EAABD1CD6FEB1008476D9 /* data */,
 				C10AB42B1CCDBB5B00FB20C1 /* README.md */,
 				C10AB42C1CCDBB5B00FB20C1 /* VERSION */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
